@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .chat-container {
+      width: 80%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      overflow-y: auto;
+      height: 300px;
+      background-color: #f9f9f9;
+      white-space: pre-wrap; /* Ensures \n adds a new line */
+    }
+    .chat-messages div {
+      margin-bottom: 10px;
+    }
+    .chat-input-container {
+      display: flex;
+      padding: 10px;
+      gap: 10px;
+      background-color: #fff;
+    }
+    textarea {
+      flex: 1;
+      height: 80px;
+      resize: none;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 14px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    button.clear-btn {
+      background-color: #dc3545;
+    }
+    button.clear-btn:hover {
+      background-color: #a71d2a;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-messages" id="chatMessages">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input-container">
+      <textarea id="chatInput" placeholder="Type your message here..."></textarea>
+      <button id="sendButton">Send</button>
+      <button id="clearButton" class="clear-btn">Clear</button>
+    </div>
+  </div>
+
+  <script>
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendButton = document.getElementById('sendButton');
+    const clearButton = document.getElementById('clearButton');
+
+    sendButton.addEventListener('click', async () => {
+      const message = chatInput.value.trim();
+      if (message) {
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.textContent = `You: ${message}`;
+        chatMessages.appendChild(userMessageDiv);
+
+        const response = await fetch("/send_message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
+
+        const data = await response.json();
+        const botMessageDiv = document.createElement('div');
+        botMessageDiv.textContent = `Bot:\n${data.response}`;
+        chatMessages.appendChild(botMessageDiv);
+
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    });
+
+    clearButton.addEventListener('click', () => {
+      chatMessages.innerHTML = '';
+    });
+  </script>
+</body>
+</html>
