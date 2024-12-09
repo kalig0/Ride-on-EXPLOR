@@ -6,8 +6,8 @@ from urllib.parse import quote
 app = Flask(__name__)
 
 # Replace with your actual keys
-vectara_key = "zut__oZQMNcHTl6aadKpWhXfw_236BWI5bEBAg_rfg"
-corpus_key = "Events"
+vectara_key = ""
+corpus_key = ""
 
 def text_to_url_query(text):
     """
