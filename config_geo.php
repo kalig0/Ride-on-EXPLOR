@@ -1,8 +1,5 @@
 <?php
 
-// 2000 Requêtes par Mois Gratuit - Paiement inexistant pour openrouteservice.org
-// 500 Requêtes par Jour Gartuit - Puis 59€ les 5000 par Jour 
-// 100 000 Requêtes par Mois Gratuit - Puis 60$ les 130 000 par Mois 
 // Fonction permettant d'avoir des informations sur la livraison (délais et distance)
 // $from sont les coordonnées de départ, $to sont les coordonnées d'arriver
 // $type est le type de moyen de transport : 
