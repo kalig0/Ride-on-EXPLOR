@@ -1,4 +1,6 @@
 <?php
+// Hackathon GenAI - Dec 2024
+// Create by Jeremy CHOUIPPE
 
 // Fonction permettant d'avoir des informations sur la livraison (délais et distance)
 // $from sont les coordonnées de départ, $to sont les coordonnées d'arriver
@@ -218,4 +220,3 @@ if(navigator.geolocation)
 }
 
 ?>
-  	
