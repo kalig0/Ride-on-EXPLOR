@@ -1,6 +1,6 @@
 <?php
-
-deleteBD('events');
+// Hackathon GenAI - Dec 2024
+// Create by Jeremy CHOUIPPE
   
 // fonction permettant la connexion à la base
 function configBD(){
